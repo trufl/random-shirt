@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
           model: Tag,
           required: false,
           attributes: ['id', 'tag_name'],
-          //through: { attributes: [] }
+          through: { attributes: ['id', 'product_id', 'tag_id'] },
         },
       ]
     });
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(products);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ error: err });
   }
 });
 
@@ -51,7 +51,7 @@ router.get('/:id', async (req, res) => {
           model: Tag,
           required: false,
           attributes: ['id', 'tag_name'],
-          //through: { attributes: [] }
+          through: { attributes: ['id', 'product_id', 'tag_id'] },
         },
       ]
     });
@@ -62,7 +62,7 @@ router.get('/:id', async (req, res) => {
 
     res.status(200).json(product);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ error: err });
   }
 });
 
@@ -145,9 +145,9 @@ router.delete('/:id', async (req, res) => {
   try {
     const confirm = await Product.destroy({ where: { id: req.params.id } });
 
-    res.status(200).json(confirm);
+    res.status(200).json("Successfully deleted product!");
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ error: err });
   }
 });
 
