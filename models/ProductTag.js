@@ -26,6 +26,10 @@ ProductTag.init(
         key: 'id',
       },
     },
+    selfGranted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   },
   {
     sequelize,
